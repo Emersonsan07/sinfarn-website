@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SINFARN - Sindicato dos Farmacêuticos do Estado do Rio Grande do Norte</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS Externo -->
+    <link rel="stylesheet" href="ccs/style.css">
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div>
+                <i class="fas fa-phone"></i> (84) 98818-0075
+                <span style="margin-left: 1.5rem;"><i class="fas fa-envelope"></i> sinfarn@gmail.com</span>
+            </div>
+                <div>
+                    <a href="#" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/sinfarn/" title="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/5584988180075" title="WhatsApp" target="_blank" ><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" title="LinkedIn" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+              </div>
+         </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="images/logo-sinfarn.png" alt="Logo SINFARN">
+                <div class="logo-text">
+                    <h1>SINFARN</h1>
+                    <p>Sindicato dos Farmacêuticos do<br>Estado do Rio Grande do Norte</p>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#inicio">Início</a></li>
+                    <li><a href="#campanha">Campanha Salarial</a></li>
+                    <li><a href="#cct">CCT</a></li>
+                    <li><a href="#noticias">Notícias</a></li>
+                    <li><a href="#associe">Associe-se</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="hero-banner" id="inicio">
+        <div class="container">
+            <h2>Campanha Salarial 2025</h2>
+            <p>Os novos pisos salariais foram aprovados! Confira os valores da CCT 2025/2026.</p>
+            
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number">2500+</span> 
+                    <!--saber o numero-->
+                    <span class="stat-label">Farmacêuticos Associados</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">15+</span>
+                    <span class="stat-label">Anos de Atuação</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Dedicação à Categoria</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Aviso Importante -->
+    <div class="container">
+        <div class="aviso-importante">
+            <h4><i class="fas fa-exclamation-triangle"></i> O SINFARN REPRESENTA SOMENTE OS FARMACÊUTICOS(AS)</h4>
+            <p>Se você atua em outra profissão, mesmo que seja dentro de uma empresa da área farmacêutica, deve procurar pelo sindicato que te representa. Nossa atuação é exclusiva para profissionais farmacêuticos devidamente registrados no CRF/RN.</p>
+        </div>
+    </div>
+
+    <!-- Principais Serviços -->
+    <section class="destaque-section" id="campanha">
+        <div class="container">
+            <h2 class="section-title">Principais Serviços</h2>
+            <p class="section-subtitle">Trabalhamos incansavelmente pela valorização e defesa dos direitos dos farmacêuticos do Rio Grande do Norte</p>
+            
+            <div class="destaque-grid">
+                <div class="destaque-card">
+                    <i class="fas fa-hand-holding-usd"></i>
+                    <h3>Campanha Salarial 2025</h3>
+                    <p>Acompanhe em tempo real o andamento das negociações salariais de acordo com cada área de atuação farmacêutica: drogarias, hospitais, indústria e distribuidoras.</p>
+                    <a href="#contato" class="btn">Acompanhar Negociações</a>
+                </div>
+
+                <div class="destaque-card">
+                    <i class="fas fa-gift"></i>
+                    <h3>Benefícios Exclusivos</h3>
+                    <p>Associados(as) têm acesso a uma ampla gama de serviços exclusivos: assessoria jurídica, planos de saúde, descontos em estabelecimentos parceiros e muito mais.</p>
+                    <a href="#https://wa.me/5584988180075" class="btn">Ver Todos os Benefícios</a>
+                </div>
+
+                <div class="destaque-card">
+                    <i class="fas fa-headset"></i>
+                    <h3>Atendimento Prioritário</h3>
+                    <p>Nossa estrutura está preparada para oferecer atendimento de qualidade. Priorizamos o atendimento aos associados(as) que fortalecem sua profissão conosco.</p>
+                    <a href="#contato" class="btn">Fale Conosco</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CCT Section -->
+<section class="cct-section" id="cct">
+  <div class="container">
+    <h2 class="section-title">Convenções Coletivas de Trabalho</h2>
+    <p class="section-subtitle">
+      Acesse as Convenções Coletivas vigentes que regulamentam as relações de trabalho e garantem direitos aos farmacêuticos do Rio Grande do Norte
+    </p>
+
+    <!-- Container dinâmico para os documentos -->
+    <div class="documento-grid" id="cctGrid"></div>
+  </div>
+
+  <script>
+    async function carregarCCT() {
+      const url = "https://script.google.com/macros/s/AKfycbzQdsTmtuKsm3A9f_hXSPLjTfdZiBJ6UjkLd1iynCvMJZP-ZGZOK9K1Qzd7SebeNGnLWA/exec";
+      const response = await fetch(url);
+      const documentos = await response.json();
+
+      const container = document.getElementById("cctGrid");
+      container.innerHTML = "";
+
+      documentos.forEach(doc => {
+        container.innerHTML += `
+          <div class="documento-card">
+            <h3><i class="${doc['Ícone']}"></i> ${doc['Título']}</h3>
+            <div class="documento-meta">
+              <span><i class="fas fa-calendar"></i> ${doc['Vigência / Data']}</span>
+              <span><i class="fas fa-folder"></i> ${doc['Categoria / Meta']}</span>
+            </div>
+            <p>${doc['Descrição']}</p>
+            <a href="${doc['Link PDF / Documento']}" class="btn" target="_blank" rel="noopener noreferrer">Acessar Documento</a>
+          </div>
+        `;
+      });
+    }
+    carregarCCT();
+  </script>
+</section>
+
+<!-- Notícias Section -->
+<section class="noticias-section" id="noticias">
+  <div class="container">
+    <h2 class="section-title">Últimas Notícias</h2>
+    <p class="section-subtitle">
+      Fique por dentro das últimas novidades e ações do sindicato em defesa da categoria farmacêutica
+    </p>
+
+    <!-- Container dinâmico para as notícias -->
+    <div class="noticias-grid" id="noticiasGrid"></div>
+
+    <script>
+  async function carregarNoticias() {
+    const url = "https://script.google.com/macros/s/AKfycbxNpowagAEBX2fd9ZFdCIOoo-eWHi5wGnqizfXowYLffYO_hidfkEKiZ78zyIi6534D/exec"; 
+    const response = await fetch(url);
+    const noticias = await response.json();
+
+    const container = document.getElementById("noticiasGrid");
+    container.innerHTML = "";
+
+    noticias.forEach(noticia => {
+      container.innerHTML += `
+        <div class="noticia-card">
+          <div class="noticia-image">
+            <i class="${noticia['Ícone']}"></i>
+          </div>
+          <div class="noticia-content">
+            <div class="noticia-data"><i class="far fa-calendar"></i> ${noticia['Data']}</div>
+            <h3>${noticia['Título']}</h3>
+            <p>${noticia['Resumo']}</p>
+            <a href="${noticia['Link']}">Leia mais <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      `;
+    });
+  }
+  carregarNoticias();
+</script>
+
+
+    <div style="text-align: center; margin-top: 3rem;">
+      <a href="#" class="btn" style="padding: 16px 45px; font-size: 1.1rem;">Ver Todas as Notícias</a>
+    </div>
+  </div>
+</section>
+
+    <!-- Associe-se -->
+    <section class="associe-section" id="associe">
+        <div class="container">
+            <h2>Associe-se Agora!</h2>
+            <p>Aproveite todos os benefícios exclusivos que só os associados(as) possuem. Fortaleça a categoria e tenha acesso a uma gama completa de serviços e vantagens.</p>
+            
+            <div class="beneficios-grid">
+                <div class="beneficio-item">
+                    <i class="fas fa-briefcase"></i>
+                    <div class="beneficio-text">
+                        <h4>Assessoria Jurídica Trabalhista</h4>
+                        <p>Assistência jurídica completa e gratuita para questões trabalhistas, rescisões, ações judiciais e orientações legais.</p>
+                    </div>
+                </div>
+
+                <div class="beneficio-item">
+                    <i class="fas fa-heartbeat"></i>
+                    <div class="beneficio-text">
+                        <h4>Planos de Saúde com Desconto</h4>
+                        <p>Acesso a planos de saúde e odontológicos com condições especiais e descontos exclusivos para associados.</p>
+                    </div>
+                </div>
+
+                <div class="beneficio-item">
+                    <i class="fas fa-percentage"></i>
+                    <div class="beneficio-text">
+                        <h4>Descontos em Estabelecimentos</h4>
+                        <p>Rede de convênios com farmácias, clínicas, academias, escolas e diversos serviços parceiros.</p>
+                    </div>
+                </div>
+
+                <div class="beneficio-item">
+                    <i class="fas fa-graduation-cap"></i>
+                    <div class="beneficio-text">
+                        <h4>Cursos e Capacitação Profissional</h4>
+                        <p>Eventos de atualização profissional, palestras, workshops e cursos com valores diferenciados.</p>
+                    </div>
+                </div>
+
+                <div class="beneficio-item">
+                    <i class="fas fa-hands-helping"></i>
+                    <div class="beneficio-text">
+                        <h4>Representação Sindical Forte</h4>
+                        <p>Defesa coletiva dos direitos e interesses da categoria em todas as esferas de negociação.</p>
+                    </div>
+                </div>
+
+                <div class="beneficio-item">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                    <div class="beneficio-text">
+                        <h4>Negociação Salarial Anual</h4>
+                        <p>Participação ativa nas campanhas salariais e negociações coletivas para melhores condições de trabalho.</p>
+                    </div>
+                </div>
+            </div>
+
+            <a href="#" class="btn btn-white">Quero me Associar Agora</a>
+        </div>
+    </section> 
+
+    <!-- Footer -->
+    <footer id="contato">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>SINFARN</h3>
+                <p>Sindicato dos Farmacêuticos do Estado do Rio Grande do Norte</p>
+                <p style="margin-top: 1.5rem;">Representando e defendendo os direitos de todos os profissionais farmacêuticos do RN desde 2008.</p>
+                <div class="social-links">
+                    <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contato</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Rua Romualdo Galvão, nº 293 – Sala 805<br>Lagoa Nova - Natal/RN<br>CEP 59000-000</p>
+                <p><i class="fas fa-phone"></i> Entre em contato</p>
+                <p><i class="fas fa-whatsapp"></i> WhatsApp disponível</p>
+                <p><i class="fas fa-envelope"></i> sinfarn@gmail.com</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Links Úteis</h3>
+                <a href="#">Estatuto do Sindicato</a>
+                <a href="#">Diretoria Atual</a>
+                <a href="#">Calendário de Eventos</a>
+                <a href="#">Área do Associado</a>
+                <a href="#">Transparência</a>
+                <a href="#">Perguntas Frequentes</a>
+            </div>
+
+            <div class="footer-section">
+                <h3>Horário de Atendimento</h3>
+                <p><i class="fas fa-clock"></i> <strong>Segunda a Sexta</strong><br>
+                08:00 às 12:00<br>
+                14:00 às 18:00</p>
+                <p style="margin-top: 1rem;"><i class="fas fa-info-circle"></i> Atendimento prioritário para associados mediante agendamento.</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 SINFARN - Sindicato dos Farmacêuticos do Estado do Rio Grande do Norte. Todos os direitos reservados.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">Desenvolvido com dedicação para fortalecer a categoria farmacêutica</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Externo -->
+    <script src="js\js/script.js"></script>
+</body>
+
+</html>
