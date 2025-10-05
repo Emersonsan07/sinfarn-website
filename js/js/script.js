@@ -316,3 +316,137 @@ if ('performance' in window) {
         console.log('⚡ Tempo de carregamento:', Math.round(perfData.loadEventEnd), 'ms');
     });
 }
+
+/* ===================================
+   MELHORIAS PARA MOBILE
+   =================================== */
+
+// Detectar dispositivo mobile
+function isMobile() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
+// Ajustar altura do viewport em iOS
+function setViewportHeight() {
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+
+if (isMobile()) {
+    window.addEventListener('resize', setViewportHeight);
+    setViewportHeight();
+}
+
+// Prevenir zoom em inputs no iOS (alternativa)
+document.addEventListener('touchstart', function() {}, {passive: true});
+
+// Smooth scroll otimizado para mobile
+if (isMobile()) {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            
+            if (target) {
+                const headerOffset = 80;
+                const elementPosition = target.offsetTop;
+                const offsetPosition = elementPosition - headerOffset;
+                
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+}
+
+// Fechar menu mobile ao clicar fora
+document.addEventListener('click', function(event) {
+    const nav = document.querySelector('nav ul');
+    const hamburger = document.querySelector('.hamburger');
+    
+    if (nav && hamburger) {
+        const isClickInsideNav = nav.contains(event.target);
+        const isClickOnHamburger = hamburger.contains(event.target);
+        
+        if (!isClickInsideNav && !isClickOnHamburger && nav.classList.contains('active')) {
+            nav.classList.remove('active');
+            hamburger.classList.remove('active');
+            hamburger.querySelector('i').className = 'fas fa-bars';
+        }
+    }
+});
+
+// Lazy loading de imagens otimizado para mobile
+if ('IntersectionObserver' in window && isMobile()) {
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                if (img.dataset.src) {
+                    img.src = img.dataset.src;
+                    img.removeAttribute('data-src');
+                    observer.unobserve(img);
+                }
+            }
+        });
+    }, {
+        rootMargin: '50px'
+    });
+    
+    document.querySelectorAll('img[data-src]').forEach(img => {
+        imageObserver.observe(img);
+    });
+}
+
+// Esconder header ao rolar para baixo (mobile)
+if (isMobile()) {
+    let lastScrollTop = 0;
+    const header = document.querySelector('header');
+    const scrollThreshold = 100;
+    
+    window.addEventListener('scroll', function() {
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        if (scrollTop > lastScrollTop && scrollTop > scrollThreshold) {
+            // Rolando para baixo
+            header.style.transform = 'translateY(-100%)';
+        } else {
+            // Rolando para cima
+            header.style.transform = 'translateY(0)';
+        }
+        
+        lastScrollTop = scrollTop;
+    }, {passive: true});
+}
+
+// Touch events para cards (feedback visual)
+if (isMobile()) {
+    const cards = document.querySelectorAll('.destaque-card, .documento-card, .noticia-card');
+    
+    cards.forEach(card => {
+        card.addEventListener('touchstart', function() {
+            this.style.transform = 'scale(0.98)';
+        }, {passive: true});
+        
+        card.addEventListener('touchend', function() {
+            this.style.transform = '';
+        }, {passive: true});
+    });
+}
+
+// Otimizar scroll performance no mobile
+let ticking = false;
+
+function optimizedScroll() {
+    // Suas funções de scroll aqui
+    ticking = false;
+}
+
+window.addEventListener('scroll', function() {
+    if (!ticking) {
+        window.requestAnimationFrame(optimizedScroll);
+        ticking = true;
+    }
+}, {passive: true});
