@@ -42,10 +42,11 @@
                 <ul>
                     <li><a href="#inicio">Início</a></li>
                     <li><a href="#campanha">Campanha Salarial</a></li>
+                    <li><a href="#calculadora">Calculadora</a></li>
                     <li><a href="#cct">CCT</a></li>
                     <li><a href="#noticias">Notícias</a></li>
                     <li><a href="#associe">Associe-se</a></li>
-                    <li><a href="#contato">Contato</a></li>
+                  <li><a href="#contato">Contato</a></li>
                 </ul>
             </nav>
         </div>
@@ -113,6 +114,108 @@
             </div>
         </div>
     </section>
+
+<!-- Calculadora de Piso Salarial -->
+<section class="calculadora-section" id="calculadora">
+    <div class="container">
+        <h2 class="section-title">Calculadora de Piso Salarial</h2>
+        <p class="section-subtitle">Descubra qual deve ser seu salário de acordo com a Convenção Coletiva de Trabalho vigente</p>
+        
+        <div class="calculadora-container">
+            <div class="calculadora-form">
+                <div class="form-group">
+                    <label for="area-atuacao-calc">
+                        <i class="fas fa-briefcase"></i> Área de Atuação *
+                    </label>
+                    <select id="area-atuacao-calc" required>
+                        <option value="">Selecione sua área...</option>
+                        <option value="hospitalar">Hospitais e Clínicas</option>
+                        <option value="distribuidora">Distribuidoras e Atacadistas</option>
+                        <option value="farmacia">Farmácias e Drogarias (Em breve)</option>
+                        <option value="industria">Indústria Farmacêutica (Em breve)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="carga-horaria">
+                        <i class="fas fa-clock"></i> Carga Horária Semanal *
+                    </label>
+                    <select id="carga-horaria" required>
+                        <option value="">Selecione...</option>
+                        <option value="44">44 horas</option>
+                        <option value="40">40 horas</option>
+                        <option value="36">36 horas</option>
+                        <option value="30">30 horas</option>
+                        <option value="20">20 horas</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="funcao-especial">
+                        <i class="fas fa-user-md"></i> Função Especial
+                    </label>
+                    <select id="funcao-especial">
+                        <option value="nenhuma">Nenhuma</option>
+                        <option value="responsavel-tecnico">Responsável Técnico (+10%)</option>
+                        <option value="quimioterapico">Farmacêutico Quimioterápico (+37%)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="salario-atual">
+                        <i class="fas fa-dollar-sign"></i> Seu Salário Atual (Opcional)
+                    </label>
+                    <input type="text" id="salario-atual" placeholder="R$ 0,00">
+                    <small>Digite para comparar com o piso da categoria</small>
+                </div>
+
+                <div class="checkbox-group">
+                    <label>
+                        <input type="checkbox" id="adicional-noturno">
+                        Trabalha em período noturno (22h às 5h)
+                    </label>
+                </div>
+
+                <div class="checkbox-group">
+                    <label>
+                        <input type="checkbox" id="insalubridade">
+                        Tem direito a adicional de insalubridade
+                    </label>
+                </div>
+
+                <button type="button" class="btn btn-calcular" onclick="calcularPiso()">
+                    <i class="fas fa-calculator"></i> Calcular Piso Salarial
+                </button>
+            </div>
+
+            <div class="calculadora-resultado" id="resultado-calculo">
+                <div class="resultado-header">
+                    <i class="fas fa-info-circle"></i>
+                    <h3>Preencha o formulário ao lado para calcular seu piso salarial</h3>
+                </div>
+                <p>A calculadora considera os valores estabelecidos nas Convenções Coletivas de Trabalho vigentes para o Rio Grande do Norte.</p>
+            </div>
+        </div>
+
+        <div class="calculadora-info">
+            <div class="info-card">
+                <i class="fas fa-file-contract"></i>
+                <h4>Base Legal</h4>
+                <p>Cálculos baseados nas CCTs registradas no MTE em 2025</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-calendar-alt"></i>
+                <h4>Data-base</h4>
+                <p>Agosto de 2025 - Valores atualizados</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-question-circle"></i>
+                <h4>Dúvidas?</h4>
+                <p>Entre em contato conosco para orientações</p>
+            </div>
+        </div>
+    </div>
+</section>
 
     <!-- CCT Section -->
 <section class="cct-section" id="cct">

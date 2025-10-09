@@ -450,3 +450,243 @@ window.addEventListener('scroll', function() {
         ticking = true;
     }
 }, {passive: true});
+
+/* ===================================
+   CALCULADORA DE PISO SALARIAL
+   =================================== */
+
+// Formatação de moeda
+function formatarMoeda(valor) {
+    return valor.toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+    });
+}
+
+// Máscara de dinheiro para input
+document.addEventListener('DOMContentLoaded', function() {
+    const inputSalario = document.getElementById('salario-atual');
+    
+    if (inputSalario) {
+        inputSalario.addEventListener('input', function(e) {
+            let valor = e.target.value.replace(/\D/g, '');
+            valor = (parseInt(valor) / 100).toFixed(2);
+            e.target.value = 'R$ ' + valor.replace('.', ',').replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+        });
+    }
+});
+
+// Função principal de cálculo
+function calcularPiso() {
+    // Obter valores dos inputs
+    const areaAtuacao = document.getElementById('area-atuacao-calc').value;
+    const cargaHoraria = parseInt(document.getElementById('carga-horaria').value);
+    const funcaoEspecial = document.getElementById('funcao-especial').value;
+    const adicionalNoturno = document.getElementById('adicional-noturno').checked;
+    const insalubridade = document.getElementById('insalubridade').checked;
+    const salarioAtualInput = document.getElementById('salario-atual').value;
+    
+    // Validações
+    if (!areaAtuacao || !cargaHoraria) {
+        alert('Por favor, preencha todos os campos obrigatórios!');
+        return;
+    }
+    
+    // Verificar se área está disponível
+    if (areaAtuacao === 'farmacia' || areaAtuacao === 'industria') {
+        alert('Esta área ainda não tem CCT registrada em 2025. Aguarde as negociações!');
+        return;
+    }
+    
+    // Valores base conforme CCT 2025
+    const valoresBase = {
+        hospitalar: 4567.81,  // 44h semanais - CCT RN000357/2025
+        distribuidora: 4567.81 // Usando mesmo valor base
+    };
+    
+    // Piso base para 44h
+    let pisoBase = valoresBase[areaAtuacao];
+    
+    // Calcular proporcional à carga horária
+    let pisoCalculado = (pisoBase / 44) * cargaHoraria;
+    
+    // Aplicar função especial
+    let adicionalFuncao = 0;
+    if (funcaoEspecial === 'responsavel-tecnico') {
+        adicionalFuncao = pisoCalculado * 0.10; // 10%
+        pisoCalculado += adicionalFuncao;
+    } else if (funcaoEspecial === 'quimioterapico') {
+        adicionalFuncao = pisoCalculado * 0.37; // 37%
+        pisoCalculado += adicionalFuncao;
+    }
+    
+    // Adicional noturno (35% para hospitais, 20% para outros)
+    let adicionalNoturnoValor = 0;
+    if (adicionalNoturno) {
+        const percentualNoturno = areaAtuacao === 'hospitalar' ? 0.35 : 0.20;
+        adicionalNoturnoValor = pisoCalculado * percentualNoturno;
+        pisoCalculado += adicionalNoturnoValor;
+    }
+    
+    // Adicional de insalubridade (varia conforme NR-15)
+    let adicionalInsalubridade = 0;
+    if (insalubridade) {
+        // Usar 40% do salário mínimo (exemplo - pode variar)
+        const salarioMinimo = 1412; // Atualizar conforme ano
+        adicionalInsalubridade = salarioMinimo * 0.40;
+        pisoCalculado += adicionalInsalubridade;
+    }
+    
+    // Processar salário atual
+    let salarioAtual = 0;
+    if (salarioAtualInput) {
+        salarioAtual = parseFloat(salarioAtualInput.replace(/[^\d,]/g, '').replace(',', '.'));
+    }
+    
+    // Exibir resultado
+    exibirResultado(pisoCalculado, {
+        areaAtuacao,
+        cargaHoraria,
+        funcaoEspecial,
+        pisoBase: (pisoBase / 44) * cargaHoraria,
+        adicionalFuncao,
+        adicionalNoturnoValor,
+        adicionalInsalubridade,
+        salarioAtual
+    });
+}
+
+function exibirResultado(valorFinal, detalhes) {
+    const resultadoDiv = document.getElementById('resultado-calculo');
+    
+    // Determinar nome da área
+    const nomesAreas = {
+        'hospitalar': 'Hospitais e Clínicas',
+        'distribuidora': 'Distribuidoras e Atacadistas'
+    };
+    
+    // Determinar nome da função
+    const nomesFuncoes = {
+        'nenhuma': 'Farmacêutico',
+        'responsavel-tecnico': 'Responsável Técnico',
+        'quimioterapico': 'Farmacêutico Quimioterápico'
+    };
+    
+    let html = `
+        <div class="resultado-dados">
+            <div class="resultado-principal">
+                <h3>Seu Piso Salarial Mínimo</h3>
+                <div class="resultado-valor">${formatarMoeda(valorFinal)}</div>
+                <p class="resultado-complemento">Para ${detalhes.cargaHoraria}h semanais em ${nomesAreas[detalhes.areaAtuacao]}</p>
+            </div>
+            
+            <div class="resultado-detalhes">
+                <h4><i class="fas fa-list-ul"></i> Composição do Salário</h4>
+                
+                <div class="detalhe-item">
+                    <span class="detalhe-label">Piso Base (${detalhes.cargaHoraria}h)</span>
+                    <span class="detalhe-valor">${formatarMoeda(detalhes.pisoBase)}</span>
+                </div>
+    `;
+    
+    if (detalhes.adicionalFuncao > 0) {
+        html += `
+                <div class="detalhe-item">
+                    <span class="detalhe-label">${nomesFuncoes[detalhes.funcaoEspecial]}</span>
+                    <span class="detalhe-valor">+ ${formatarMoeda(detalhes.adicionalFuncao)}</span>
+                </div>
+        `;
+    }
+    
+    if (detalhes.adicionalNoturnoValor > 0) {
+        html += `
+                <div class="detalhe-item">
+                    <span class="detalhe-label">Adicional Noturno</span>
+                    <span class="detalhe-valor">+ ${formatarMoeda(detalhes.adicionalNoturnoValor)}</span>
+                </div>
+        `;
+    }
+    
+    if (detalhes.adicionalInsalubridade > 0) {
+        html += `
+                <div class="detalhe-item">
+                    <span class="detalhe-label">Adicional de Insalubridade</span>
+                    <span class="detalhe-valor">+ ${formatarMoeda(detalhes.adicionalInsalubridade)}</span>
+                </div>
+        `;
+    }
+    
+    html += `
+                <div class="detalhe-item" style="border-top: 2px solid #009245; padding-top: 1rem; margin-top: 0.5rem;">
+                    <span class="detalhe-label"><strong>Total Mínimo</strong></span>
+                    <span class="detalhe-valor"><strong>${formatarMoeda(valorFinal)}</strong></span>
+                </div>
+            </div>
+    `;
+    
+    // Comparação com salário atual
+    if (detalhes.salarioAtual > 0) {
+        const diferenca = detalhes.salarioAtual - valorFinal;
+        let classeComparacao = '';
+        let icone = '';
+        let mensagem = '';
+        
+        if (diferenca < 0) {
+            classeComparacao = 'abaixo';
+            icone = '<i class="fas fa-exclamation-triangle"></i>';
+            mensagem = `Atenção! Seu salário está <strong>${formatarMoeda(Math.abs(diferenca))}</strong> abaixo do piso da categoria. Entre em contato com o sindicato!`;
+        } else if (diferenca > 0) {
+            classeComparacao = 'acima';
+            icone = '<i class="fas fa-check-circle"></i>';
+            mensagem = `Seu salário está <strong>${formatarMoeda(diferenca)}</strong> acima do piso mínimo. Parabéns!`;
+        } else {
+            classeComparacao = '';
+            icone = '<i class="fas fa-equals"></i>';
+            mensagem = `Seu salário está exatamente no piso da categoria.`;
+        }
+        
+        html += `
+            <div class="resultado-comparacao ${classeComparacao}">
+                <h4>${icone} Comparação com seu salário atual</h4>
+                <p>Seu salário: ${formatarMoeda(detalhes.salarioAtual)}</p>
+                <p>${mensagem}</p>
+            </div>
+        `;
+    }
+    
+    html += `
+            <div class="resultado-alerta">
+                <i class="fas fa-info-circle"></i> <strong>Importante:</strong> Este cálculo é uma estimativa baseada na CCT vigente. Outros benefícios e condições podem se aplicar. Para orientação personalizada, entre em contato com o SINFARN.
+            </div>
+            
+            <button type="button" class="btn" style="margin-top: 1.5rem;" onclick="calcularNovamente()">
+                <i class="fas fa-redo"></i> Calcular Novamente
+            </button>
+        </div>
+    `;
+    
+    resultadoDiv.innerHTML = html;
+    
+    // Scroll suave até o resultado
+    resultadoDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function calcularNovamente() {
+    // Limpar formulário
+    document.getElementById('area-atuacao-calc').value = '';
+    document.getElementById('carga-horaria').value = '';
+    document.getElementById('funcao-especial').value = 'nenhuma';
+    document.getElementById('adicional-noturno').checked = false;
+    document.getElementById('insalubridade').checked = false;
+    document.getElementById('salario-atual').value = '';
+    
+    // Resetar resultado
+    const resultadoDiv = document.getElementById('resultado-calculo');
+    resultadoDiv.innerHTML = `
+        <div class="resultado-header">
+            <i class="fas fa-info-circle"></i>
+            <h3>Preencha o formulário ao lado para calcular seu piso salarial</h3>
+        </div>
+        <p>A calculadora considera os valores estabelecidos nas Convenções Coletivas de Trabalho vigentes para o Rio Grande do Norte.</p>
+    `;
+}
