@@ -1,0 +1,125 @@
+{
+  "ultimaAtualizacao": "2025-08-20",
+  "dataBase": "Agosto/2025",
+  "registroMTE": "RN000357/2025",
+  "salarioMinimo": 1412,
+  "areas": {
+    "hospitalar": {
+      "nome": "Hospitais e Clínicas",
+      "registroMTE": "RN000357/2025",
+      "dataRegistro": "20/08/2025",
+      "vigencia": {
+        "inicio": "01/08/2025",
+        "fim": "31/12/2025"
+      },
+      "pisos": {
+        "44h": 4567.81,
+        "40h": 4152.55,
+        "36h": 3737.29,
+        "30h": 3111.07,
+        "20h": 2074.05
+      },
+      "adicionais": {
+        "responsavelTecnico": 10,
+        "quimioterapico": 37,
+        "noturno": 35,
+        "insalubridade": 40
+      },
+      "observacoes": "Para jornada 12x36, o piso é calculado sobre 220 horas mensais",
+      "status": "vigente"
+    },
+    "distribuidora": {
+      "nome": "Distribuidoras e Atacadistas",
+      "registroMTE": "RN000307/2025",
+      "dataRegistro": "11/07/2025",
+      "vigencia": {
+        "inicio": "01/07/2025",
+        "fim": "31/12/2025"
+      },
+      "pisos": {
+        "44h": 4567.81,
+        "40h": 4152.55,
+        "36h": 3737.29,
+        "30h": 3111.07,
+        "20h": 2074.05
+      },
+      "adicionais": {
+        "responsavelTecnico": 10,
+        "quimioterapico": 37,
+        "noturno": 20,
+        "insalubridade": 40
+      },
+      "observacoes": "Convenção específica para atacadistas e distribuidoras de medicamentos",
+      "status": "vigente"
+    },
+    "farmacia": {
+      "nome": "Farmácias e Drogarias",
+      "registroMTE": "",
+      "dataRegistro": "",
+      "vigencia": {
+        "inicio": "",
+        "fim": ""
+      },
+      "pisos": {
+        "44h": 4200.00,
+        "40h": 3818.18,
+        "36h": 3436.36,
+        "30h": 2863.64,
+        "20h": 1909.09
+      },
+      "adicionais": {
+        "responsavelTecnico": 10,
+        "quimioterapico": 0,
+        "noturno": 20,
+        "insalubridade": 40
+      },
+      "observacoes": "Valores estimados. CCT em negociação para 2025/2026",
+      "status": "negociacao"
+    },
+    "industria": {
+      "nome": "Indústria Farmacêutica",
+      "registroMTE": "",
+      "dataRegistro": "",
+      "vigencia": {
+        "inicio": "",
+        "fim": ""
+      },
+      "pisos": {
+        "44h": 0,
+        "40h": 0,
+        "36h": 0,
+        "30h": 0,
+        "20h": 0
+      },
+      "adicionais": {
+        "responsavelTecnico": 10,
+        "quimioterapico": 0,
+        "noturno": 20,
+        "insalubridade": 40
+      },
+      "observacoes": "Ainda não há CCT específica para indústria farmacêutica no RN",
+      "status": "sem-cct"
+    }
+  },
+  "informacoes": {
+    "reajusteLinear": {
+      "percentual": 2,
+      "limiteInferior": 4567.81,
+      "limiteSuperior": 7786.02,
+      "descricao": "Reajuste linear de 2% para salários entre o piso e R$ 7.786,02"
+    },
+    "abonoIndenizatorio": {
+      "valor": 205.55,
+      "jornada": 220,
+      "percentual": 1.5,
+      "meses": 3,
+      "descricao": "Abono para jornadas de 220h mensais. Calculado em 1,5% do piso x 3 meses"
+    },
+    "observacoesGerais": [
+      "Valores baseados em CCTs registradas no MTE em 2025",
+      "Adicional de insalubridade calculado sobre 40% do salário mínimo",
+      "Para farmacêutico quimioterápico, o piso é acrescido de 37%",
+      "Empresas que concederem reajuste igual ou superior a 3,5% ficam dispensadas do abono indenizatório"
+    ]
+  }
+}

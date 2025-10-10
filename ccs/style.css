@@ -1591,3 +1591,267 @@ nav a.active::after {
         padding: 1.5rem;
     }
 }
+
+/* ===================================
+   BANNER DE INFORMAÇÕES CCT
+   =================================== */
+.cct-info-banner {
+    background: linear-gradient(135deg, #e7f5ec 0%, #d4edda 100%);
+    padding: 1.2rem 20px;
+    border-bottom: 3px solid #009245;
+    margin-bottom: 2rem;
+    animation: slideDown 0.5s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.info-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.info-content i {
+    font-size: 2rem;
+    color: #009245;
+    flex-shrink: 0;
+}
+
+.info-text {
+    color: #155724;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.info-text strong {
+    font-weight: 600;
+    color: #009245;
+}
+
+/* Notificações */
+.notificacao {
+    position: fixed;
+    top: 20px;
+    right: -400px;
+    background: white;
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    z-index: 10000;
+    transition: right 0.3s ease;
+    min-width: 300px;
+    max-width: 400px;
+}
+
+.notificacao.show {
+    right: 20px;
+}
+
+.notificacao i {
+    font-size: 1.5rem;
+}
+
+.notificacao-success {
+    border-left: 5px solid #28a745;
+}
+
+.notificacao-success i {
+    color: #28a745;
+}
+
+.notificacao-warning {
+    border-left: 5px solid #ffc107;
+}
+
+.notificacao-warning i {
+    color: #ffc107;
+}
+
+.notificacao-error {
+    border-left: 5px solid #dc3545;
+}
+
+.notificacao-error i {
+    color: #dc3545;
+}
+
+.notificacao-info {
+    border-left: 5px solid #17a2b8;
+}
+
+.notificacao-info i {
+    color: #17a2b8;
+}
+
+/* Info CCT no resultado */
+.resultado-info-cct {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-top: 1.5rem;
+    border-left: 4px solid #009245;
+}
+
+.resultado-info-cct h4 {
+    color: #009245;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.info-cct-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.info-cct-grid p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.info-cct-grid strong {
+    color: #333;
+}
+
+.observacao-cct {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e0e0e0;
+    color: #666;
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+.observacao-cct i {
+    color: #009245;
+    margin-right: 0.5rem;
+}
+
+/* Ações do resultado */
+.resultado-acoes {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.resultado-acoes .btn {
+    flex: 1;
+    min-width: 200px;
+    justify-content: center;
+}
+
+/* Alerta de status */
+.resultado-alerta-status {
+    background: rgba(255, 193, 7, 0.2);
+    color: #856404;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* Animação fade-in */
+.fade-in {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Print styles */
+@media print {
+    .top-bar,
+    header,
+    .breadcrumb,
+    footer,
+    .resultado-acoes,
+    .btn-calcular,
+    .back-to-top {
+        display: none !important;
+    }
+    
+    .calculadora-form {
+        display: none !important;
+    }
+    
+    .calculadora-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .calculadora-resultado {
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+    
+    .resultado-valor {
+        color: #009245 !important;
+    }
+}
+
+/* Responsivo Mobile */
+@media (max-width: 768px) {
+    .cct-info-banner {
+        padding: 1rem 15px;
+    }
+    
+    .info-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .info-text {
+        font-size: 0.85rem;
+    }
+    
+    .notificacao {
+        right: -100%;
+        left: 10px;
+        right: 10px;
+        min-width: auto;
+    }
+    
+    .notificacao.show {
+        right: 10px;
+    }
+    
+    .info-cct-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .resultado-acoes {
+        flex-direction: column;
+    }
+    
+    .resultado-acoes .btn {
+        width: 100%;
+        min-width: auto;
+    }
+}

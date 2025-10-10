@@ -452,35 +452,124 @@ window.addEventListener('scroll', function() {
 }, {passive: true});
 
 /* ===================================
-   CALCULADORA DE PISO SALARIAL
+   SISTEMA DE CALCULADORA COM JSON DINÂMICO
    =================================== */
 
-// Formatação de moeda
-function formatarMoeda(valor) {
-    return valor.toLocaleString('pt-BR', {
-        style: 'currency',
-        currency: 'BRL'
-    });
+// Variável global para armazenar dados da CCT
+let dadosCCT = null;
+let carregandoDados = false;
+
+// Carregar dados da CCT ao iniciar
+async function carregarDadosCCT() {
+    if (carregandoDados) return;
+    carregandoDados = true;
+    
+    try {
+        mostrarLoadingCalculadora(true);
+        
+        const response = await fetch('dados/cct-valores.json');
+        
+        if (!response.ok) {
+            throw new Error('Erro ao carregar dados da CCT');
+        }
+        
+        dadosCCT = await response.json();
+        console.log('✅ Dados da CCT carregados com sucesso!', dadosCCT);
+        
+        // Atualizar interface com informações da CCT
+        atualizarInfoCCT();
+        mostrarLoadingCalculadora(false);
+        
+        // Mostrar mensagem de sucesso
+        mostrarNotificacao('Dados da CCT carregados com sucesso!', 'success');
+        
+    } catch (error) {
+        console.error('❌ Erro ao carregar CCT:', error);
+        mostrarLoadingCalculadora(false);
+        
+        // Usar valores padrão em caso de erro
+        usarValoresPadrao();
+        mostrarNotificacao('Usando valores padrão. Verifique sua conexão.', 'warning');
+    }
+    
+    carregandoDados = false;
 }
 
-// Máscara de dinheiro para input
-document.addEventListener('DOMContentLoaded', function() {
-    const inputSalario = document.getElementById('salario-atual');
+// Mostrar/Ocultar loading na calculadora
+function mostrarLoadingCalculadora(mostrar) {
+    const btnCalcular = document.querySelector('.btn-calcular');
     
-    if (inputSalario) {
-        inputSalario.addEventListener('input', function(e) {
-            let valor = e.target.value.replace(/\D/g, '');
-            valor = (parseInt(valor) / 100).toFixed(2);
-            e.target.value = 'R$ ' + valor.replace('.', ',').replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
-        });
+    if (btnCalcular) {
+        if (mostrar) {
+            btnCalcular.disabled = true;
+            btnCalcular.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Carregando dados...';
+        } else {
+            btnCalcular.disabled = false;
+            btnCalcular.innerHTML = '<i class="fas fa-calculator"></i> Calcular Piso Salarial';
+        }
     }
-});
+}
 
-// Função principal de cálculo
+// Atualizar informações da CCT na interface
+function atualizarInfoCCT() {
+    if (!dadosCCT) return;
+    
+    // Formatar data para exibição
+    const dataFormatada = new Date(dadosCCT.ultimaAtualizacao).toLocaleDateString('pt-BR');
+    
+    // Criar banner informativo se não existir
+    const calculadoraSection = document.querySelector('.calculadora-section');
+    
+    if (calculadoraSection && !document.querySelector('.cct-info-banner')) {
+        const banner = document.createElement('div');
+        banner.className = 'cct-info-banner';
+        banner.innerHTML = `
+            <div class="info-content">
+                <i class="fas fa-check-circle"></i>
+                <div class="info-text">
+                    <strong>CCT Atualizada:</strong> ${dataFormatada} | 
+                    <strong>Data-base:</strong> ${dadosCCT.dataBase} | 
+                    <strong>Registro MTE:</strong> ${dadosCCT.registroMTE}
+                </div>
+            </div>
+        `;
+        calculadoraSection.insertBefore(banner, calculadoraSection.firstChild);
+    }
+}
+
+// Mostrar notificação
+function mostrarNotificacao(mensagem, tipo = 'info') {
+    const notificacao = document.createElement('div');
+    notificacao.className = `notificacao notificacao-${tipo}`;
+    notificacao.innerHTML = `
+        <i class="fas fa-${tipo === 'success' ? 'check-circle' : tipo === 'warning' ? 'exclamation-triangle' : 'info-circle'}"></i>
+        <span>${mensagem}</span>
+    `;
+    
+    document.body.appendChild(notificacao);
+    
+    setTimeout(() => {
+        notificacao.classList.add('show');
+    }, 100);
+    
+    setTimeout(() => {
+        notificacao.classList.remove('show');
+        setTimeout(() => notificacao.remove(), 300);
+    }, 3000);
+}
+
+// Função principal de cálculo (ATUALIZADA)
 function calcularPiso() {
+    // Verificar se dados foram carregados
+    if (!dadosCCT) {
+        mostrarNotificacao('Aguarde o carregamento dos dados da CCT...', 'warning');
+        carregarDadosCCT();
+        return;
+    }
+    
     // Obter valores dos inputs
     const areaAtuacao = document.getElementById('area-atuacao-calc').value;
-    const cargaHoraria = parseInt(document.getElementById('carga-horaria').value);
+    const cargaHoraria = document.getElementById('carga-horaria').value;
     const funcaoEspecial = document.getElementById('funcao-especial').value;
     const adicionalNoturno = document.getElementById('adicional-noturno').checked;
     const insalubridade = document.getElementById('insalubridade').checked;
@@ -488,96 +577,116 @@ function calcularPiso() {
     
     // Validações
     if (!areaAtuacao || !cargaHoraria) {
-        alert('Por favor, preencha todos os campos obrigatórios!');
+        mostrarNotificacao('Por favor, preencha todos os campos obrigatórios!', 'warning');
         return;
     }
     
-    // Verificar se área está disponível
-    if (areaAtuacao === 'farmacia' || areaAtuacao === 'industria') {
-        alert('Esta área ainda não tem CCT registrada em 2025. Aguarde as negociações!');
+    // Pegar dados da área selecionada
+    const dadosArea = dadosCCT.areas[areaAtuacao];
+    
+    if (!dadosArea) {
+        mostrarNotificacao('Área de atuação não encontrada!', 'error');
         return;
     }
     
-    // Valores base conforme CCT 2025
-    const valoresBase = {
-        hospitalar: 4567.81,  // 44h semanais - CCT RN000357/2025
-        distribuidora: 4567.81 // Usando mesmo valor base
-    };
+    // Verificar status da área
+    if (dadosArea.status === 'sem-cct') {
+        mostrarNotificacao('Esta área ainda não possui CCT registrada. Aguarde as negociações!', 'warning');
+        return;
+    }
     
-    // Piso base para 44h
-    let pisoBase = valoresBase[areaAtuacao];
+    if (dadosArea.status === 'negociacao') {
+        if (!confirm('⚠️ Esta área está em negociação. Os valores apresentados são estimados e podem mudar.\n\nDeseja continuar com o cálculo?')) {
+            return;
+        }
+    }
     
-    // Calcular proporcional à carga horária
-    let pisoCalculado = (pisoBase / 44) * cargaHoraria;
+    // Pegar piso base da carga horária
+    const colunaPiso = cargaHoraria + 'h';
+    let pisoBase = dadosArea.pisos[colunaPiso];
+    
+    if (!pisoBase || pisoBase === 0) {
+        mostrarNotificacao('Piso não definido para esta carga horária!', 'warning');
+        return;
+    }
+    
+    let pisoCalculado = pisoBase;
     
     // Aplicar função especial
     let adicionalFuncao = 0;
-    if (funcaoEspecial === 'responsavel-tecnico') {
-        adicionalFuncao = pisoCalculado * 0.10; // 10%
+    let nomeFuncao = 'Farmacêutico';
+    const percentuais = dadosArea.adicionais;
+    
+    if (funcaoEspecial === 'responsavel-tecnico' && percentuais.responsavelTecnico > 0) {
+        adicionalFuncao = pisoCalculado * (percentuais.responsavelTecnico / 100);
         pisoCalculado += adicionalFuncao;
-    } else if (funcaoEspecial === 'quimioterapico') {
-        adicionalFuncao = pisoCalculado * 0.37; // 37%
+        nomeFuncao = 'Responsável Técnico';
+    } else if (funcaoEspecial === 'quimioterapico' && percentuais.quimioterapico > 0) {
+        adicionalFuncao = pisoCalculado * (percentuais.quimioterapico / 100);
         pisoCalculado += adicionalFuncao;
+        nomeFuncao = 'Farmacêutico Quimioterápico';
     }
     
-    // Adicional noturno (35% para hospitais, 20% para outros)
+    // Adicional noturno
     let adicionalNoturnoValor = 0;
-    if (adicionalNoturno) {
-        const percentualNoturno = areaAtuacao === 'hospitalar' ? 0.35 : 0.20;
-        adicionalNoturnoValor = pisoCalculado * percentualNoturno;
+    if (adicionalNoturno && percentuais.noturno > 0) {
+        adicionalNoturnoValor = pisoBase * (percentuais.noturno / 100);
         pisoCalculado += adicionalNoturnoValor;
     }
     
-    // Adicional de insalubridade (varia conforme NR-15)
+    // Adicional de insalubridade
     let adicionalInsalubridade = 0;
-    if (insalubridade) {
-        // Usar 40% do salário mínimo (exemplo - pode variar)
-        const salarioMinimo = 1412; // Atualizar conforme ano
-        adicionalInsalubridade = salarioMinimo * 0.40;
+    if (insalubridade && percentuais.insalubridade > 0) {
+        const salarioMinimo = dadosCCT.salarioMinimo || 1412;
+        adicionalInsalubridade = salarioMinimo * (percentuais.insalubridade / 100);
         pisoCalculado += adicionalInsalubridade;
     }
     
     // Processar salário atual
     let salarioAtual = 0;
-    if (salarioAtualInput) {
+    if (salarioAtualInput && salarioAtualInput.trim() !== '') {
         salarioAtual = parseFloat(salarioAtualInput.replace(/[^\d,]/g, '').replace(',', '.'));
     }
     
     // Exibir resultado
     exibirResultado(pisoCalculado, {
-        areaAtuacao,
-        cargaHoraria,
+        areaAtuacao: dadosArea.nome,
+        cargaHoraria: cargaHoraria,
+        nomeFuncao: nomeFuncao,
         funcaoEspecial,
-        pisoBase: (pisoBase / 44) * cargaHoraria,
+        pisoBase: pisoBase,
         adicionalFuncao,
         adicionalNoturnoValor,
         adicionalInsalubridade,
-        salarioAtual
+        salarioAtual,
+        registroMTE: dadosArea.registroMTE || dadosCCT.registroMTE,
+        dataBase: dadosCCT.dataBase,
+        vigencia: dadosArea.vigencia,
+        status: dadosArea.status,
+        observacoes: dadosArea.observacoes,
+        percentuais: percentuais
     });
 }
 
+// Exibir resultado (ATUALIZADA)
 function exibirResultado(valorFinal, detalhes) {
     const resultadoDiv = document.getElementById('resultado-calculo');
     
-    // Determinar nome da área
-    const nomesAreas = {
-        'hospitalar': 'Hospitais e Clínicas',
-        'distribuidora': 'Distribuidoras e Atacadistas'
-    };
-    
-    // Determinar nome da função
-    const nomesFuncoes = {
-        'nenhuma': 'Farmacêutico',
-        'responsavel-tecnico': 'Responsável Técnico',
-        'quimioterapico': 'Farmacêutico Quimioterápico'
-    };
-    
+function formatarMoeda(valor) {
+  return valor.toLocaleString('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+  });
+}
+
+
     let html = `
         <div class="resultado-dados">
             <div class="resultado-principal">
                 <h3>Seu Piso Salarial Mínimo</h3>
                 <div class="resultado-valor">${formatarMoeda(valorFinal)}</div>
-                <p class="resultado-complemento">Para ${detalhes.cargaHoraria}h semanais em ${nomesAreas[detalhes.areaAtuacao]}</p>
+                <p class="resultado-complemento">Para ${detalhes.cargaHoraria}h semanais em ${detalhes.areaAtuacao}</p>
+                ${detalhes.status === 'negociacao' ? '<p class="resultado-alerta-status">⚠️ Valores em negociação</p>' : ''}
             </div>
             
             <div class="resultado-detalhes">
@@ -590,9 +699,11 @@ function exibirResultado(valorFinal, detalhes) {
     `;
     
     if (detalhes.adicionalFuncao > 0) {
+        const percent = detalhes.funcaoEspecial === 'responsavel-tecnico' ? 
+            detalhes.percentuais.responsavelTecnico : detalhes.percentuais.quimioterapico;
         html += `
                 <div class="detalhe-item">
-                    <span class="detalhe-label">${nomesFuncoes[detalhes.funcaoEspecial]}</span>
+                    <span class="detalhe-label">${detalhes.nomeFuncao} (+${percent}%)</span>
                     <span class="detalhe-valor">+ ${formatarMoeda(detalhes.adicionalFuncao)}</span>
                 </div>
         `;
@@ -601,7 +712,7 @@ function exibirResultado(valorFinal, detalhes) {
     if (detalhes.adicionalNoturnoValor > 0) {
         html += `
                 <div class="detalhe-item">
-                    <span class="detalhe-label">Adicional Noturno</span>
+                    <span class="detalhe-label">Adicional Noturno (+${detalhes.percentuais.noturno}%)</span>
                     <span class="detalhe-valor">+ ${formatarMoeda(detalhes.adicionalNoturnoValor)}</span>
                 </div>
         `;
@@ -627,6 +738,8 @@ function exibirResultado(valorFinal, detalhes) {
     // Comparação com salário atual
     if (detalhes.salarioAtual > 0) {
         const diferenca = detalhes.salarioAtual - valorFinal;
+        const porcentagem = valorFinal > 0 ? ((diferenca / valorFinal) * 100).toFixed(1) : 0;
+        
         let classeComparacao = '';
         let icone = '';
         let mensagem = '';
@@ -634,11 +747,11 @@ function exibirResultado(valorFinal, detalhes) {
         if (diferenca < 0) {
             classeComparacao = 'abaixo';
             icone = '<i class="fas fa-exclamation-triangle"></i>';
-            mensagem = `Atenção! Seu salário está <strong>${formatarMoeda(Math.abs(diferenca))}</strong> abaixo do piso da categoria. Entre em contato com o sindicato!`;
+            mensagem = `<strong>Atenção!</strong> Seu salário está <strong>${formatarMoeda(Math.abs(diferenca))}</strong> (${Math.abs(porcentagem)}%) abaixo do piso da categoria.<br><br>Entre em contato com o SINFARN para orientações!`;
         } else if (diferenca > 0) {
             classeComparacao = 'acima';
             icone = '<i class="fas fa-check-circle"></i>';
-            mensagem = `Seu salário está <strong>${formatarMoeda(diferenca)}</strong> acima do piso mínimo. Parabéns!`;
+            mensagem = `Seu salário está <strong>${formatarMoeda(diferenca)}</strong> (${porcentagem}%) acima do piso mínimo. Parabéns!`;
         } else {
             classeComparacao = '';
             icone = '<i class="fas fa-equals"></i>';
@@ -648,20 +761,37 @@ function exibirResultado(valorFinal, detalhes) {
         html += `
             <div class="resultado-comparacao ${classeComparacao}">
                 <h4>${icone} Comparação com seu salário atual</h4>
-                <p>Seu salário: ${formatarMoeda(detalhes.salarioAtual)}</p>
+                <p><strong>Seu salário:</strong> ${formatarMoeda(detalhes.salarioAtual)}</p>
                 <p>${mensagem}</p>
             </div>
         `;
     }
+    
+    // Informações da CCT
+    html += `
+        <div class="resultado-info-cct">
+            <h4><i class="fas fa-file-contract"></i> Informações da CCT</h4>
+            <div class="info-cct-grid">
+                ${detalhes.registroMTE ? `<p><strong>Registro MTE:</strong> ${detalhes.registroMTE}</p>` : ''}
+                <p><strong>Data-base:</strong> ${detalhes.dataBase}</p>
+                ${detalhes.vigencia && detalhes.vigencia.inicio ? 
+                    `<p><strong>Vigência:</strong> ${detalhes.vigencia.inicio} a ${detalhes.vigencia.fim}</p>` : ''}
+            </div>
+            ${detalhes.observacoes ? `<p class="observacao-cct"><i class="fas fa-info-circle"></i> ${detalhes.observacoes}</p>` : ''}
+        </div>
+    `;
     
     html += `
             <div class="resultado-alerta">
                 <i class="fas fa-info-circle"></i> <strong>Importante:</strong> Este cálculo é uma estimativa baseada na CCT vigente. Outros benefícios e condições podem se aplicar. Para orientação personalizada, entre em contato com o SINFARN.
             </div>
             
-            <button type="button" class="btn" style="margin-top: 1.5rem;" onclick="calcularNovamente()">
-                <i class="fas fa-redo"></i> Calcular Novamente
-            </button>
+            <div class="resultado-acoes">
+                <button type="button" class="btn" onclick="calcularNovamente()">
+                    <i class="fas fa-redo"></i> Calcular Novamente
+                </button>
+                
+            </div>
         </div>
     `;
     
@@ -669,8 +799,14 @@ function exibirResultado(valorFinal, detalhes) {
     
     // Scroll suave até o resultado
     resultadoDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    
+    // Animação de entrada
+    setTimeout(() => {
+        resultadoDiv.querySelector('.resultado-dados').classList.add('fade-in');
+    }, 100);
 }
 
+// Calcular novamente
 function calcularNovamente() {
     // Limpar formulário
     document.getElementById('area-atuacao-calc').value = '';
@@ -689,4 +825,61 @@ function calcularNovamente() {
         </div>
         <p>A calculadora considera os valores estabelecidos nas Convenções Coletivas de Trabalho vigentes para o Rio Grande do Norte.</p>
     `;
+    
+    // Scroll para o topo da calculadora
+    document.querySelector('.calculadora-section').scrollIntoView({ behavior: 'smooth' });
 }
+
+// Imprimir resultado
+function imprimirResultado() {
+    window.print();
+}
+
+// Função de fallback com dados básicos
+function usarValoresPadrao() {
+    console.warn('⚠️ Usando dados de fallback');
+    
+    dadosCCT = {
+        ultimaAtualizacao: "2025-08-20",
+        dataBase: "Agosto/2025",
+        registroMTE: "RN000357/2025",
+        salarioMinimo: 1412,
+        areas: {
+            hospitalar: {
+                nome: "Hospitais e Clínicas",
+                registroMTE: "RN000357/2025",
+                pisos: {
+                    "44h": 4567.81,
+                    "40h": 4152.55,
+                    "36h": 3737.29,
+                    "30h": 3111.07,
+                    "20h": 2074.05
+                },
+                adicionais: {
+                    responsavelTecnico: 10,
+                    quimioterapico: 37,
+                    noturno: 35,
+                    insalubridade: 40
+                },
+                status: "vigente",
+                vigencia: { inicio: "01/08/2025", fim: "31/12/2025" }
+            }
+        }
+    };
+}
+
+// Carregar dados ao iniciar página
+document.addEventListener('DOMContentLoaded', function() {
+    if (document.getElementById('area-atuacao-calc')) {
+        carregarDadosCCT();
+    }
+});
+
+// Recarregar dados a cada 30 minutos (opcional)
+setInterval(function() {
+    if (document.getElementById('area-atuacao-calc')) {
+        console.log('🔄 Atualizando dados da CCT...');
+        dadosCCT = null;
+        carregarDadosCCT();
+    }
+}, 30 * 60 * 1000); // 30 minutos
