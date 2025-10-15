@@ -1855,3 +1855,30 @@ nav a.active::after {
         min-width: auto;
     }
 }
+
+/* Carrossel  */
+
+.my-5 {
+  margin-top: 2rem !important;
+  margin-bottom: 3rem !important;
+
+}
+
+.owl-carousel {
+  width: 100%;
+  position: relative; 
+  z-index: 1;
+}
+
+.owl-carousel.owl-loaded {
+  display: block;
+}
+
+.owl-carousel .item {
+  text-align: center;
+  padding: 2px;
+  display: inline-block;
+  width: 50%;
+ /* height: */;
+ object-fit: cover;
+}
