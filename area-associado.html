@@ -1,0 +1,386 @@
+<!-- <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área do Associado - SINFARN</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="ccs/sub-page-style.css">
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div>
+                <i class="fas fa-phone"></i> (84) 3000-0000
+                <span style="margin-left: 1.5rem;"><i class="fas fa-envelope"></i> sinfarn@gmail.com</span>
+            </div>
+            <div>
+                <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html" style="display: flex; align-items: center; gap: 15px; text-decoration: none;">
+                    <img src="images/logo-sinfarn.png" alt="Logo SINFARN" style="width: 60px; height: 60px;">
+                    <div class="logo-text">
+                        <h1 style="font-size: 1.3rem; margin-bottom: 0;">SINFARN</h1>
+                        <p style="font-size: 0.75rem; margin: 0;">Sindicato dos Farmacêuticos do RN</p>
+                    </div>
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="index.html#calculadora">Calculadora</a></li>
+                    <li><a href="index.html#comparador">Comparador</a></li>
+                    <li><a href="index.html#associe">Associe-se</a></li>
+                    <li><a href="index.html#contato">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="index.html"><i class="fas fa-home"></i> Início</a>
+            <span><i class="fas fa-chevron-right"></i></span>
+            <a href="#links-uteis">Links Úteis</a>
+            <span><i class="fas fa-chevron-right"></i></span>
+            <span>Área do Associado</span>
+        </div>
+    </div>
+
+    <!-- Conteúdo Principal -->
+    <section class="pagina-conteudo">
+        <div class="container">
+            <h1 class="page-title"><i class="fas fa-user-shield"></i> Área do Associado</h1>
+            <p class="page-subtitle">Acesse seus documentos, contribuições e benefícios exclusivos</p>
+
+            <!-- Aviso de Login -->
+            <div class="info-box-destaque" style="background: #e7f5ec; border-left-color: #009245;">
+                <i class="fas fa-lock"></i>
+                <div>
+                    <strong>⚠️ Área Protegida:</strong> Esta seção requer autenticação. Use suas credenciais de associado para acessar.
+                </div>
+            </div>
+
+            <!-- Sistema de Login -->
+            <div class="login-section">
+                <div class="login-card">
+                    <h2><i class="fas fa-sign-in-alt"></i> Acesso de Associado</h2>
+                    
+                    <form class="form-login">
+                        <div class="form-group">
+                            <label for="cpf">CPF *</label>
+                            <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" required>
+                            <small>Sem pontuação ou com pontuação normal</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="senha">Senha *</label>
+                            <input type="password" id="senha" name="senha" placeholder="Sua senha" required>
+                            <small><a href="#">Esqueceu a senha?</a></small>
+                        </div>
+
+                        <div class="form-group checkbox-group">
+                            <label>
+                                <input type="checkbox" name="lembrar">
+                                Manter-me conectado
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn btn-large">
+                            <i class="fas fa-sign-in-alt"></i> Entrar
+                        </button>
+
+                        <p class="texto-alternativo">
+                            Não é associado ainda? <a href="index.html#associe">Associe-se agora</a>
+                        </p>
+                    </form>
+                </div>
+
+                <!-- Instruções de Acesso -->
+                <div class="instrucoes-login">
+                    <h3><i class="fas fa-question-circle"></i> Como acessar?</h3>
+                    
+                    <div class="instrucoes-grid">
+                        <div class="instrucao-card">
+                            <div class="numero">1</div>
+                            <h4>Digite seu CPF</h4>
+                            <p>Use o CPF cadastrado no SINFARN</p>
+                        </div>
+
+                        <div class="instrucao-card">
+                            <div class="numero">2</div>
+                            <h4>Informe sua senha</h4>
+                            <p>Você recebeu por e-mail ou SMS</p>
+                        </div>
+
+                        <div class="instrucao-card">
+                            <div class="numero">3</div>
+                            <h4>Pronto!</h4>
+                            <p>Acesse todos os seus documentos</p>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <i class="fas fa-lightbulb"></i>
+                        <div>
+                            <strong>Primeira vez?</strong><br>
+                            Se não recebeu sua senha, <a href="index.html#contato">entre em contato conosco</a> para redefini-la.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- O que você pode fazer -->
+            <div class="recursos-associado">
+                <h2><i class="fas fa-star"></i> Acesso Exclusivo para Associados</h2>
+                <p>Após fazer login, você terá acesso a:</p>
+
+                <div class="recursos-grid">
+                    <div class="recurso-card">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                        <h3>Comprovante de Contribuição</h3>
+                        <p>Extrato de todas as suas contribuições mensais e anuais</p>
+                    </div>
+
+                    <div class="recurso-card">
+                        <i class="fas fa-download"></i>
+                        <h3>Documentos Digitais</h3>
+                        <p>Carteirinha, certificados e comprovantes em PDF</p>
+                    </div>
+
+                    <div class="recurso-card">
+                        <i class="fas fa-heart"></i>
+                        <h3>Benefícios Contratados</h3>
+                        <p>Informações sobre planos de saúde e seguros</p>
+                    </div>
+
+                    <div class="recurso-card">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>Cursos Realizados</h3>
+                        <p>Certificados de cursos e palestras que participou</p>
+                    </div>
+
+                    <div class="recurso-card">
+                        <i class="fas fa-calendar-check"></i>
+                        <h3>Eventos Inscritos</h3>
+                        <p>Lista de eventos que se inscreveu e presenças</p>
+                    </div>
+
+                    <div class="recurso-card">
+                        <i class="fas fa-envelope"></i>
+                        <h3>Mensagens do Sindicato</h3>
+                        <p>Comunicados importantes e avisos diretos</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Área do Associado -->
+            <div class="faq-section">
+                <h2><i class="fas fa-help-circle"></i> Dúvidas Frequentes</h2>
+
+                <div class="faq-accordion">
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Como recuperar minha senha?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Clique em "Esqueceu a senha?" na tela de login e siga as instruções. Você receberá um link de recuperação no seu e-mail cadastrado. Se não funcionar, <a href="index.html#contato">entre em contato conosco</a>.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Como faço para baixar minha carteirinha digital?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Após fazer login, vá em "Meus Documentos" e clique em "Carteirinha Digital". Você pode baixar em PDF ou visualizar no celular com QR Code.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Onde vejo meu comprovante de contribuição?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Na seção "Financeiro", você encontra todos os comprovantes de contribuição. Pode filtrar por período e baixar em PDF para fins fiscais.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Como atualizar meus dados cadastrais?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Clique em "Meu Perfil" após fazer login. Você pode atualizar telefone, e-mail e endereço. Para alterar dados como CPF ou nome, solicite diretamente à diretoria.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Como cancelar minha filiação?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Entre em contato com a diretoria por e-mail ou telefone. Solicitações de cancelamento devem ser formalizadas por escrito conforme o Estatuto.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Segurança -->
+            <div class="seguranca-section">
+                <h2><i class="fas fa-shield-alt"></i> Segurança e Privacidade</h2>
+                
+                <div class="seguranca-cards">
+                    <div class="seguranca-card">
+                        <i class="fas fa-lock"></i>
+                        <h4>Conexão Segura</h4>
+                        <p>Todos os dados são transmitidos com criptografia SSL/TLS</p>
+                    </div>
+
+                    <div class="seguranca-card">
+                        <i class="fas fa-eye-slash"></i>
+                        <h4>Privacidade Garantida</h4>
+                        <p>Seus dados pessoais não são compartilhados com terceiros</p>
+                    </div>
+
+                    <div class="seguranca-card">
+                        <i class="fas fa-clock"></i>
+                        <h4>Sessão Automática</h4>
+                        <p>Sua sessão expira após 30 minutos de inatividade</p>
+                    </div>
+
+                    <div class="seguranca-card">
+                        <i class="fas fa-check-circle"></i>
+                        <h4>LGPD Compliant</h4>
+                        <p>Estamos em conformidade com a Lei Geral de Proteção de Dados</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Suporte -->
+            <div class="suporte-section">
+                <h2><i class="fas fa-headset"></i> Precisa de Ajuda?</h2>
+                <p>Nossa equipe está pronta para ajudá-lo</p>
+
+                <div class="suporte-cards">
+                    <div class="suporte-card">
+                        <i class="fas fa-phone"></i>
+                        <h4>Telefone</h4>
+                        <p>(84) 3000-0000</p>
+                        <small>Seg-Sex: 08:00 - 18:00</small>
+                    </div>
+
+                    <div class="suporte-card">
+                        <i class="fas fa-envelope"></i>
+                        <h4>E-mail</h4>
+                        <p>sinfarn@gmail.com</p>
+                        <small>Resposta em até 24h</small>
+                    </div>
+
+                    <div class="suporte-card">
+                        <i class="fas fa-comments"></i>
+                        <h4>WhatsApp</h4>
+                        <p>(84) 99999-9999</p>
+                        <small>Seg-Sex: 09:00 - 17:00</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ainda não é associado?</h2>
+            <p>Desfrute de todos os benefícios exclusivos da SINFARN</p>
+            <a href="index.html#filiacao" class="btn btn-large">
+                <i class="fas fa-user-plus"></i> Associe-se Agora
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>SINFARN</h3>
+                <p>Sindicato dos Farmacêuticos do Estado do Rio Grande do Norte</p>
+                <p style="margin-top: 1.5rem;">Representando e defendendo os direitos de todos os profissionais farmacêuticos do RN desde 2008.</p>
+                <div class="social-links">
+                    <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contato</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Rua Romualdo Galvão, nº 293 – Sala 805<br>Lagoa Nova - Natal/RN<br>CEP 59000-000</p>
+                <p><i class="fas fa-phone"></i> (84) 3000-0000</p>
+                <p><i class="fas fa-whatsapp"></i> (84) 99999-9999</p>
+                <p><i class="fas fa-envelope"></i> sinfarn@gmail.com</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Links Úteis</h3>
+                <a href="estatuto.html">Estatuto do Sindicato</a>
+                <a href="diretoria.html">Diretoria Atual</a>
+                <a href="calendario-eventos.html">Calendário de Eventos</a>
+                <a href="area-associado.html">Área do Associado</a>
+                <a href="transparencia.html">Transparência</a>
+                <a href="perguntas-frequentes.html">Perguntas Frequentes</a>
+            </div>
+
+            <div class="footer-section">
+                <h3>Horário de Atendimento</h3>
+                <p><i class="fas fa-clock"></i> <strong>Segunda a Sexta</strong><br>
+                08:00 às 12:00<br>
+                14:00 às 18:00</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 SINFARN - Sindicato dos Farmacêuticos do Estado do Rio Grande do Norte. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', function() {
+                const answer = this.nextElementSibling;
+                const isActive = this.classList.contains('active');
+                
+                document.querySelectorAll('.faq-question').forEach(btn => {
+                    btn.classList.remove('active');
+                    btn.nextElementSibling.style.display = 'none';
+                });
+                
+                if (!isActive) {
+                    this.classList.add('active');
+                    answer.style.display = 'block';
+                }
+            });
+        });
+    </script>
+</body> 
+</html> 

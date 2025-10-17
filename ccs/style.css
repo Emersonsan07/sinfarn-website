@@ -1866,6 +1866,9 @@ nav a.active::after {
 
 .owl-carousel {
   width: 100%;
+  max-width: 1200px; /* opcional, para limitar a largura */
+  margin-left: auto  /*2rem*/;
+  margin-right: auto  /*2rem*/;
   position: relative; 
   z-index: 1;
 }
@@ -1876,9 +1879,12 @@ nav a.active::after {
 
 .owl-carousel .item {
   text-align: center;
-  padding: 2px;
+  margin-right:  0px; 
+  padding: 0px;
   display: inline-block;
   width: 50%;
  /* height: */;
  object-fit: cover;
 }
+
+

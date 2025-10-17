@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perguntas Frequentes - SINFARN</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="ccs/sub-page-style.css">
+</head>
+<body>
+<!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div>
+                <i class="fas fa-phone"></i> (84) 3000-0000
+                <span style="margin-left: 1.5rem;"><i class="fas fa-envelope"></i> sinfarn@gmail.com</span>
+            </div>
+            <div>
+                <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html" style="display: flex; align-items: center; gap: 15px; text-decoration: none;">
+                    <img src="images/logo-sinfarn.png" alt="Logo SINFARN" style="width: 60px; height: 60px;">
+                    <div class="logo-text">
+                        <h1 style="font-size: 1.3rem; margin-bottom: 0;">SINFARN</h1>
+                        <p style="font-size: 0.75rem; margin: 0;">Sindicato dos Farmacêuticos do RN</p>
+                    </div>
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="index.html#calculadora">Calculadora</a></li>
+                    <li><a href="index.html#comparador">Comparador</a></li>
+                    <li><a href="index.html#associe">Associe-se</a></li>
+                    <li><a href="index.html#contato">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="index.html"><i class="fas fa-home"></i> Início</a>
+            <span><i class="fas fa-chevron-right"></i></span>
+            <a href="#links-uteis">Links Úteis</a>
+            <span><i class="fas fa-chevron-right"></i></span>
+            <span>Perguntas Frequentes</span>
+        </div>
+    </div>
+
+    <!-- Conteúdo Principal -->
+    <section class="pagina-conteudo">
+        <div class="container">
+            <h1 class="page-title"><i class="fas fa-comments"></i> Perguntas Frequentes</h1>
+            <p class="page-subtitle">Encontre respostas para as dúvidas mais comuns sobre o SINFARN</p>
+
+            <!-- Barra de Busca -->
+            <div class="faq-busca">
+                <input type="text" id="busca-faq" placeholder="Busque sua dúvida aqui..." class="input-busca">
+                <i class="fas fa-search"></i>
+            </div>
+
+            <!-- Categorias de Perguntas -->
+            <div class="faq-categorias">
+                <button class="categoria-btn active" onclick="filtrarFAQ('todas')">Todas</button>
+                <button class="categoria-btn" onclick="filtrarFAQ('filiacao')">Filiação</button>
+                <button class="categoria-btn" onclick="filtrarFAQ('cct')">CCT e Direitos</button>
+                <button class="categoria-btn" onclick="filtrarFAQ('beneficios')">Benefícios</button>
+                <button class="categoria-btn" onclick="filtrarFAQ('contribuicao')">Contribuição</button>
+                <button class="categoria-btn" onclick="filtrarFAQ('processos')">Processos</button>
+                <button class="categoria-btn" onclick="filtrarFAQ('eventos')">Eventos</button>
+            </div>
+
+            <!-- FAQs Agrupadas -->
+            <div class="faq-grupos">
+
+                <!-- FILIAÇÃO -->
+                <div class="faq-grupo" data-categoria="filiacao">
+                    <h2><i class="fas fa-user-plus"></i> Filiação</h2>
+
+                    <div class="faq-accordion">
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>Como faço para me filiar ao SINFARN?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Você pode se filiar de duas formas:</p>
+                                <ul>
+                                    <li><strong>Online:</strong> Preencha o formulário de filiação em nosso site (seção Associe-se)</li>
+                                    <li><strong>Presencialmente:</strong> Compareça na nossa sede com RG, CPF e registro do CRF/RN</li>
+                                </ul>
+                                <p>Após aprovação, você recebe sua carteirinha e pode acessar todos os benefícios!</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>Quais são os requisitos para ser associado?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Para ser associado do SINFARN, você deve:</p>
+                                <ul>
+                                    <li>Ser farmacêutico(a) formado(a)</li>
+                                    <li>Estar com CRF/RN ativo e regularizado</li>
+                                    <li>Atuar ou ter residência no Rio Grande do Norte</li>
+                                    <li>Concordar com o Estatuto e normas do sindicato</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>Qual é o valor da mensalidade?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <p>A contribuição associativa é de <strong>1% do piso salarial</strong> da categoria, definido na CCT vigente.</p>
+                                <p>Exemplo: Se o piso é R$ 4.567,81, a contribuição seria de R$ 45,68</p>
+                                <p>Essa valor é descontado diretamente na sua folha de pagamento pela empresa.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>Preciso trabalhar registrado para me filiar?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Não necessariamente! Você pode se filiar mesmo se for autônomo, desempregado ou ainda não está trabalhando. Nesse caso, a contribuição é combinada diretamente com o sindicato.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>Posso desfiliar-me quando quiser?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Sim! Você pode solicitar desfiliação a qualquer momento. Deve enviar requerimento formal ao sindicato informando o motivo. O sindicato tem 10 dias para processar.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CCT E DIREITOS -->
+                <div class="faq-grupo" data-categoria="cct">
+                    <h2><i class="fas fa-file-contract"></i> CCT e Direitos Trabalhistas</h2>
+
+                    <div class="faq-accordion">
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>O que é uma Convenção Coletiva de Trabalho (CCT)?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <p>A CCT é um acordo coletivo entre o sindicato dos trabalhadores e o sindicato dos empregadores que estabelece:</p>
+                                <ul>
+                                    <li>Piso salarial mínimo</li>
+                                    <li>Jornada de trabalho</li>
+                                    <li>Benefícios (vale-transporte, alimentação, etc.)</li>
+                                    <li>Adicionais (noturno, insalubridade, etc.)</li>
+                                    <li>Direitos e deveres de ambas as partes</li>
+                                </ul>
+                                <p>A CCT é válida para todos os farmacêuticos da categoria, estejam ou não sindicalizados.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>Meu salário está abaixo do piso. O que faço?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Isso é uma irregularidade! Você pode:</p>
+                                <ol>
+                                    <li>Procure o SINFARN para orientações jurídicas</li>
+                                    <li>Faça uma denúncia formal pelo sindicato</li>
+                                    <li>O sindicato acionará o empregador para regularizar</li>
+                                    <li>Se necessário, entramos com ação judicial</li>
+                                </ol>
+                                <p>Como associado, você tem acesso a assessoria jurídica gratuita!</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>Tenho direito a adicional noturno?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Sim! Segundo a CCT vigente, farmacêuticos que trabalham no período noturno (entre 22h e 5h) têm direito a:</p>
+                                <ul>
+                                    <li><strong>Hospitais/Clínicas:</strong> 35% de adicional</li>
+                                    <li><strong>Farmácias/Distribuidoras:</strong> 20% de adicional</li>
+                                </ul>
+                                <p>Esse percentual é aplicado sobre o seu piso salarial.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>Como funciona a jornada 12x36?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <p>A jornada 12x36 significa 12 horas de trabalho seguidas por 36 horas de descanso ininterrupto.</p>
+                                <p><strong>Remuneração:</strong> É calculada sobre 220 horas mensais</p>
+                                <p><strong>Intervalo:</strong> 1 hora para refeição durante o turno</p>
+                                <p><strong>Aplicável em:</strong> Estabelecimentos que funcionam 24 horas (hospitais, prontos-socorros, etc.)</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>E se meu empregador não cumpre a CCT?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Você pode:</p>
+                                <ol>
+                                    <li><strong>Denunciar ao SINFARN</strong> para que acionemos o empregador</li>
+                                    <li><strong>Buscar assessoria jurídica</strong> do sindicato (gratuita para associados)</li>
+                                    <li><strong>Entrar com ação judicial</strong> se necessário, com apoio do sindicato</li>
+                                </ol>
+                                <p>Muitos casos são resolvidos sem necessidade de processos!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BENEFÍCIOS -->
+                <div class="faq-grupo" data-categoria="beneficios">
+                    <h2><i class="fas fa-gift"></i> Benefícios para Associados</h2>
+
+                    <div class="faq-accordion">
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>Quais são os principais benefícios de ser associado?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Os associados do SINFARN têm acesso a:</p>
+                                <ul>
+                                    <li><strong>Assessoria Jurídica Gratuita</strong> - para questões trabalhistas</li>
+                                    <li><strong>Planos de Saúde com Desconto</strong> - convênios especiais</li>
+                                    <li><strong>Seguro de Vida Coletivo</strong> - proteção para sua família</li>
+                                    <li><strong>Descontos em Estabelecimentos</strong> - farmácias, clínicas, academias</li>
+                                    <li><strong>Cursos e Capacitação</strong> - com valores reduzidos</li>
+                                    <li><strong>Representação Sindical</strong> - defesa de seus direitos</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>Como faço para acessar os convênios?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Você recebe a carteirinha do SINFARN com lista de parceiros. Basta levar a carteira no estabelecimento conveniado e solicitar o desconto.</p>
+                                <p>Se precisar da lista atualizada, acesse sua conta na Área do Associado ou solicite pelo telefone.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>O plano de saúde é obrigatório?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Não! É opcional. O SINFARN oferece a oportunidade de contratar planos com desconto especial, mas é sua escolha aderir ou não.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>Quanto custa a assessoria jurídica?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <p>A assessoria jurídica é <strong>100% gratuita</strong> para todos os associados em dia com suas contribuições!</p>
+                                <p>Você pode agendar consultas, receber orientações e até termos judiciais preparados sem custos adicionais.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CONTRIBUIÇÃO -->
+                <div class="faq-grupo" data-categoria="contribuicao">
+                    <h2><i class="fas fa-credit-card"></i> Contribuição e Pagamento</h2>
+
+                    <div class="faq-accordion">
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>Como é feito o desconto de contribuição?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <p>A contribuição é descontada automaticamente de sua folha de pagamento mensalmente. O empregador recolhe o valor e repassa ao SINFARN.</p>
+                                <p>Você receberá um comprovante do desconto em sua folha.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>E se eu for autônomo ou desempregado?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Nesse caso, você pode:</p>
+                                <ul>
+                                    <li>Pagar boleto mensal</li>
+                                    <li>Pagar via PIX</li>
+                                    <li>Pagar via débito em conta</li>
+                                </ul>
+                                <p>Entre em contato conosco para combinar a melhor forma de pagamento!</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>Há contribuição assistencial também?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Sim! Conforme a CCT, há uma contribuição assistencial de 2% do piso salarial, destinada a:</p>
+                                <ul>
+                                    <li>Benefícios aos associados</li>
+                                    <li>Programas sociais</li>
+                                    <li>Atividades de solidariedade</li>
+                                </ul>
+                                <p>Você tem direito de oposição a essa contribuição se desejar. Entre em contato para saber como.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>Como compro meu comprovante de contribuição?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Você pode acessar diretamente em sua conta na Área do Associado ou solicitar pelo telefone/e-mail. O comprovante é gratuito!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PROCESSOS E DENÚNCIAS -->
+                <div class="faq-grupo" data-categoria="processos">
+                    <h2><i class="fas fa-gavel"></i> Processos e Denúncias</h2>
+
+                    <div class="faq-accordion">
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>Como faço uma denúncia de irregularidades?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Você pode fazer uma denúncia através de:</p>
+                                <ul>
+                                    <li><strong>Telefone:</strong> (84) 3000-0000</li>
+                                    <li><strong>E-mail:</strong> sinfarn@gmail.com</li>
+                                    <li><strong>WhatsApp:</strong> (84) 99999-9999</li>
+                                    <li><strong>Presencialmente:</strong> Nossa sede (com sigilo garantido)</li>
+                                    <li><strong>Formulário Online:</strong> Seção de Denúncias Anônimas</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>Minha denúncia será anônima?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Você pode fazer denúncia anônima através do formulário online específico. Sua identidade será mantida em sigilo absoluto, conforme determina a lei.</p>
+                                <p>Se preferir se identificar, também oferecemos proteção legal ao denunciante.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>Quanto tempo leva para resolver um processo?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Isso depende do tipo de caso:</p>
+                                <ul>
+                                    <li><strong>Negociação direta:</strong> 1-2 semanas</li>
+                                    <li><strong>Mediação:</strong> 1-3 meses</li>
+                                    <li><strong>Processo judicial:</strong> Vários meses a anos</li>
+                                </ul>
+                                <p>Nossa equipe jurídica te informará sobre o tempo estimado assim que analisar seu caso.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>Preciso pagar algo para ter assessoria?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Não! Toda assessoria jurídica é gratuita para associados em dia com contribuições. Você não paga advogado, honorários ou nenhuma taxa.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- EVENTOS -->
+                <div class="faq-grupo" data-categoria="eventos">
+                    <h2><i class="fas fa-calendar-alt"></i> Eventos e Atividades</h2>
+
+                    <div class="faq-accordion">
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>Como faço para participar de um evento?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Acesse a seção "Calendário de Eventos", escolha o evento desejado e clique em "Inscrever-se". Você receberá confirmação no e-mail cadastrado.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>Os cursos têm certificado?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Sim! Todos os cursos, palestras e workshops oferecidos pelo SINFARN incluem certificado de participação com carga horária reconhecida.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>Quanto custa para participar dos cursos?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Para <strong>associados:</strong> Geralmente gratuito ou com valor reduzido</p>
+                                <p>Para <strong>não-associados:</strong> Há uma taxa que pode ser consultada no calendário de eventos</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>Como funciona as assembleias?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <p>As assembleias são deliberativas onde os associados votam sobre temas importantes. Você pode:</p>
+                                <ul>
+                                    <li><strong>Participar presencialmente</strong> em nossa sede</li>
+                                    <li><strong>Participar online</strong> via Zoom (quando oferecido)</li>
+                                    <li><strong>Votar em temas</strong> referentes à categoria</li>
+                                    <li><strong>Propor temas</strong> a serem debatidos</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>Não encontrei minha dúvida. O que faço?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Nenhum problema! Entre em contato conosco:</p>
+                                <p><i class="fas fa-phone"></i> <strong>Telefone:</strong> (84) 3000-0000</p>
+                                <p><i class="fas fa-envelope"></i> <strong>E-mail:</strong> sinfarn@gmail.com</p>
+                                <p><i class="fas fa-whatsapp"></i> <strong>WhatsApp:</strong> (84) 99999-9999</p>
+                                <p>Estamos prontos para responder todas as suas dúvidas!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ainda tem dúvidas?</h2>
+            <p>Nossa equipe está disponível para ajudá-lo</p>
+            <a href="index.html#contato" class="btn btn-large">
+                <i class="fas fa-phone"></i> Entre em Contato
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>SINFARN</h3>
+                <p>Sindicato dos Farmacêuticos do Estado do Rio Grande do Norte</p>
+                <p style="margin-top: 1.5rem;">Representando e defendendo os direitos de todos os profissionais farmacêuticos do RN desde 2008.</p>
+                <div class="social-links">
+                    <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contato</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Rua Romualdo Galvão, nº 293 – Sala 805<br>Lagoa Nova - Natal/RN<br>CEP 59000-000</p>
+                <p><i class="fas fa-phone"></i> (84) 3000-0000</p>
+                <p><i class="fas fa-whatsapp"></i> (84) 99999-9999</p>
+                <p><i class="fas fa-envelope"></i> sinfarn@gmail.com</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Links Úteis</h3>
+                <a href="estatuto.html">Estatuto do Sindicato</a>
+                <a href="diretoria.html">Diretoria Atual</a>
+                <a href="calendario-eventos.html">Calendário de Eventos</a>
+                <a href="transparencia.html">Transparência</a>
+                <a href="perguntas-frequentes.html">Perguntas Frequentes</a>
+            </div>
+
+            <div class="footer-section">
+                <h3>Horário de Atendimento</h3>
+                <p><i class="fas fa-clock"></i> <strong>Segunda a Sexta</strong><br>
+                08:00 às 12:00<br>
+                14:00 às 18:00</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 SINFARN - Sindicato dos Farmacêuticos do Estado do Rio Grande do Norte. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', function() {
+                const answer = this.nextElementSibling;
+                const isActive = this.classList.contains('active');
+                
+                document.querySelectorAll('.faq-question').forEach(btn => {
+                    btn.classList.remove('active');
+                    btn.nextElementSibling.style.display = 'none';
+                });
+                
+                if (!isActive) {
+                    this.classList.add('active');
+                    answer.style.display = 'block';
+                }
+            });
+        });
+
+        // Filtrar FAQs por categoria
+        function filtrarFAQ(categoria) {
+            // Remover active de todos os botões
+            document.querySelectorAll('.categoria-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Adicionar active ao botão clicado
+            event.target.classList.add('active');
+            
+            // Mostrar/ocultar grupos
+            document.querySelectorAll('.faq-grupo').forEach(grupo => {
+                const groupCategoria = grupo.getAttribute('data-categoria');
+                
+                if (categoria === 'todas' || groupCategoria === categoria) {
+                    grupo.style.display = 'block';
+                    setTimeout(() => {
+                        grupo.classList.add('fade-in');
+                    }, 10);
+                } else {
+                    grupo.classList.remove('fade-in');
+                    setTimeout(() => {
+                        grupo.style.display = 'none';
+                    }, 300);
+                }
+            });
+        }
+
+        // Busca de FAQs
+        document.getElementById('busca-faq').addEventListener('input', function(e) {
+            const termo = e.target.value.toLowerCase();
+            
+            document.querySelectorAll('.faq-item').forEach(item => {
+                const pergunta = item.querySelector('.faq-question span').textContent.toLowerCase();
+                const resposta = item.querySelector('.faq-answer').textContent.toLowerCase();
+                
+                if (pergunta.includes(termo) || resposta.includes(termo) || termo === '') {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
